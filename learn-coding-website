@@ -1,0 +1,269 @@
+learn-coding-websiteimport React, { useState } from 'react';
+import { Menu, Code, Book, Play, Globe, ChevronRight } from 'lucide-react';
+
+const W3SchoolsClone = () => {
+  const [lang, setLang] = useState('ar');
+  const [selectedTopic, setSelectedTopic] = useState('html');
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const translations = {
+    ar: {
+      title: 'تعلم البرمجة',
+      subtitle: 'أكبر موقع لتعليم البرمجة على الإنترنت',
+      tutorials: 'الدروس',
+      examples: 'أمثلة',
+      exercises: 'تمارين',
+      tryIt: 'جربها بنفسك',
+      run: 'تشغيل',
+      topics: {
+        html: 'HTML',
+        css: 'CSS',
+        javascript: 'JavaScript',
+        python: 'Python',
+        react: 'React'
+      },
+      lessons: {
+        html: {
+          title: 'مقدمة إلى HTML',
+          description: 'HTML هي لغة الترميز القياسية لإنشاء صفحات الويب.',
+          content: 'HTML تعني Hyper Text Markup Language. إنها اللغة الأساسية لبناء المواقع الإلكترونية وتستخدم لتحديد هيكل ومحتوى صفحة الويب.',
+          example: '<!DOCTYPE html>\n<html>\n<head>\n  <title>صفحتي الأولى</title>\n</head>\n<body>\n  <h1>مرحباً بالعالم!</h1>\n  <p>هذه أول فقرة لي.</p>\n</body>\n</html>'
+        },
+        css: {
+          title: 'مقدمة إلى CSS',
+          description: 'CSS تستخدم لتنسيق تخطيط صفحات الويب.',
+          content: 'CSS تعني Cascading Style Sheets. تصف كيفية عرض عناصر HTML على الشاشة.',
+          example: 'body {\n  background-color: lightblue;\n}\n\nh1 {\n  color: navy;\n  text-align: center;\n}\n\np {\n  font-family: Arial;\n  font-size: 20px;\n}'
+        },
+        javascript: {
+          title: 'مقدمة إلى JavaScript',
+          description: 'JavaScript هي لغة البرمجة للويب.',
+          content: 'JavaScript يمكنها تحديث وتغيير كل من HTML و CSS. يمكنها حساب البيانات ومعالجتها والتحقق منها.',
+          example: 'function sayHello() {\n  let name = "أحمد";\n  console.log("مرحباً " + name);\n}\n\nsayHello();\n\n// حساب مجموع رقمين\nlet sum = 5 + 10;\nconsole.log(sum);'
+        },
+        python: {
+          title: 'مقدمة إلى Python',
+          description: 'Python لغة برمجة شائعة وسهلة التعلم.',
+          content: 'Python هي لغة برمجة مفسرة عالية المستوى. إنها رائعة للمبتدئين وقوية بما يكفي للمحترفين.',
+          example: '# مثال بسيط على Python\nname = "محمد"\nprint(f"مرحباً {name}")\n\n# حلقة تكرارية\nfor i in range(5):\n    print(i)'
+        },
+        react: {
+          title: 'مقدمة إلى React',
+          description: 'React مكتبة JavaScript لبناء واجهات المستخدم.',
+          content: 'React تسمح لك بإنشاء مكونات قابلة لإعادة الاستخدام لبناء واجهات مستخدم تفاعلية.',
+          example: 'function Welcome() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <h1>مرحباً في React!</h1>\n      <p>العدد: {count}</p>\n      <button onClick={() => setCount(count + 1)}>\n        انقر هنا\n      </button>\n    </div>\n  );\n}'
+        }
+      }
+    },
+    en: {
+      title: 'Learn to Code',
+      subtitle: 'The World\'s Largest Web Developer Site',
+      tutorials: 'Tutorials',
+      examples: 'Examples',
+      exercises: 'Exercises',
+      tryIt: 'Try it Yourself',
+      run: 'Run',
+      topics: {
+        html: 'HTML',
+        css: 'CSS',
+        javascript: 'JavaScript',
+        python: 'Python',
+        react: 'React'
+      },
+      lessons: {
+        html: {
+          title: 'HTML Introduction',
+          description: 'HTML is the standard markup language for creating Web pages.',
+          content: 'HTML stands for Hyper Text Markup Language. It is the fundamental language for building websites and is used to define the structure and content of a web page.',
+          example: '<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n  <p>This is my first paragraph.</p>\n</body>\n</html>'
+        },
+        css: {
+          title: 'CSS Introduction',
+          description: 'CSS is used to style the layout of web pages.',
+          content: 'CSS stands for Cascading Style Sheets. It describes how HTML elements are to be displayed on screen.',
+          example: 'body {\n  background-color: lightblue;\n}\n\nh1 {\n  color: navy;\n  text-align: center;\n}\n\np {\n  font-family: Arial;\n  font-size: 20px;\n}'
+        },
+        javascript: {
+          title: 'JavaScript Introduction',
+          description: 'JavaScript is the programming language of the Web.',
+          content: 'JavaScript can update and change both HTML and CSS. It can calculate, manipulate, and validate data.',
+          example: 'function sayHello() {\n  let name = "John";\n  console.log("Hello " + name);\n}\n\nsayHello();\n\n// Calculate sum of two numbers\nlet sum = 5 + 10;\nconsole.log(sum);'
+        },
+        python: {
+          title: 'Python Introduction',
+          description: 'Python is a popular and easy-to-learn programming language.',
+          content: 'Python is a high-level interpreted programming language. It\'s great for beginners and powerful enough for professionals.',
+          example: '# Simple Python example\nname = "John"\nprint(f"Hello {name}")\n\n# Loop example\nfor i in range(5):\n    print(i)'
+        },
+        react: {
+          title: 'React Introduction',
+          description: 'React is a JavaScript library for building user interfaces.',
+          content: 'React allows you to create reusable components to build interactive user interfaces.',
+          example: 'function Welcome() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <h1>Welcome to React!</h1>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}'
+        }
+      }
+    },
+    fr: {
+      title: 'Apprendre à Coder',
+      subtitle: 'Le Plus Grand Site pour Développeurs Web',
+      tutorials: 'Tutoriels',
+      examples: 'Exemples',
+      exercises: 'Exercices',
+      tryIt: 'Essayez-le vous-même',
+      run: 'Exécuter',
+      topics: {
+        html: 'HTML',
+        css: 'CSS',
+        javascript: 'JavaScript',
+        python: 'Python',
+        react: 'React'
+      },
+      lessons: {
+        html: {
+          title: 'Introduction à HTML',
+          description: 'HTML est le langage de balisage standard pour créer des pages Web.',
+          content: 'HTML signifie Hyper Text Markup Language. C\'est le langage fondamental pour construire des sites Web et il est utilisé pour définir la structure et le contenu d\'une page Web.',
+          example: '<!DOCTYPE html>\n<html>\n<head>\n  <title>Ma Première Page</title>\n</head>\n<body>\n  <h1>Bonjour le Monde!</h1>\n  <p>Ceci est mon premier paragraphe.</p>\n</body>\n</html>'
+        },
+        css: {
+          title: 'Introduction à CSS',
+          description: 'CSS est utilisé pour styliser la mise en page des pages Web.',
+          content: 'CSS signifie Cascading Style Sheets. Il décrit comment les éléments HTML doivent être affichés à l\'écran.',
+          example: 'body {\n  background-color: lightblue;\n}\n\nh1 {\n  color: navy;\n  text-align: center;\n}\n\np {\n  font-family: Arial;\n  font-size: 20px;\n}'
+        },
+        javascript: {
+          title: 'Introduction à JavaScript',
+          description: 'JavaScript est le langage de programmation du Web.',
+          content: 'JavaScript peut mettre à jour et modifier à la fois HTML et CSS. Il peut calculer, manipuler et valider des données.',
+          example: 'function sayHello() {\n  let name = "Jean";\n  console.log("Bonjour " + name);\n}\n\nsayHello();\n\n// Calculer la somme de deux nombres\nlet sum = 5 + 10;\nconsole.log(sum);'
+        },
+        python: {
+          title: 'Introduction à Python',
+          description: 'Python est un langage de programmation populaire et facile à apprendre.',
+          content: 'Python est un langage de programmation interprété de haut niveau. Il est excellent pour les débutants et assez puissant pour les professionnels.',
+          example: '# Exemple simple Python\nname = "Jean"\nprint(f"Bonjour {name}")\n\n# Exemple de boucle\nfor i in range(5):\n    print(i)'
+        },
+        react: {
+          title: 'Introduction à React',
+          description: 'React est une bibliothèque JavaScript pour créer des interfaces utilisateur.',
+          content: 'React vous permet de créer des composants réutilisables pour construire des interfaces utilisateur interactives.',
+          example: 'function Welcome() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <h1>Bienvenue dans React!</h1>\n      <p>Compteur: {count}</p>\n      <button onClick={() => setCount(count + 1)}>\n        Cliquez ici\n      </button>\n    </div>\n  );\n}'
+        }
+      }
+    }
+  };
+
+  const t = translations[lang];
+  const currentLesson = t.lessons[selectedTopic];
+
+  return (
+    <div className={`min-h-screen bg-gray-50 ${lang === 'ar' ? 'rtl' : 'ltr'}`}>
+      {/* Header */}
+      <header className="bg-green-600 text-white shadow-lg">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Code className="w-8 h-8" />
+            <div>
+              <h1 className="text-2xl font-bold">{t.title}</h1>
+              <p className="text-sm text-green-100">{t.subtitle}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <Globe className="w-5 h-5" />
+            <select 
+              value={lang} 
+              onChange={(e) => setLang(e.target.value)}
+              className="bg-green-700 text-white px-3 py-2 rounded-lg border-none outline-none cursor-pointer"
+            >
+              <option value="ar">العربية</option>
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex">
+        {/* Sidebar */}
+        <aside className={`${sidebarOpen ? 'w-64' : 'w-0'} bg-white shadow-lg transition-all duration-300 overflow-hidden`}>
+          <nav className="p-4">
+            <h3 className="font-bold text-lg mb-4 text-gray-700">{t.tutorials}</h3>
+            <ul className="space-y-2">
+              {Object.keys(t.topics).map((topic) => (
+                <li key={topic}>
+                  <button
+                    onClick={() => setSelectedTopic(topic)}
+                    className={`w-full text-${lang === 'ar' ? 'right' : 'left'} px-4 py-2 rounded-lg flex items-center justify-between transition-colors ${
+                      selectedTopic === topic
+                        ? 'bg-green-600 text-white'
+                        : 'hover:bg-gray-100 text-gray-700'
+                    }`}
+                  >
+                    <span>{t.topics[topic]}</span>
+                    <ChevronRight className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 p-8">
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="mb-4 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+
+          <div className="max-w-4xl">
+            {/* Lesson Header */}
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <Book className="w-8 h-8 text-green-600" />
+                <h2 className="text-3xl font-bold text-gray-800">{currentLesson.title}</h2>
+              </div>
+              <p className="text-gray-600 text-lg">{currentLesson.description}</p>
+            </div>
+
+            {/* Lesson Content */}
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+              <p className="text-gray-700 text-lg leading-relaxed">{currentLesson.content}</p>
+            </div>
+
+            {/* Code Example */}
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="bg-gray-800 text-white px-6 py-3 flex items-center justify-between">
+                <span className="font-semibold">{t.examples}</span>
+                <button className="flex items-center gap-2 bg-green-600 px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                  <Play className="w-4 h-4" />
+                  {t.run}
+                </button>
+              </div>
+              <pre className="bg-gray-900 text-gray-100 p-6 overflow-x-auto">
+                <code className="text-sm">{currentLesson.example}</code>
+              </pre>
+            </div>
+
+            {/* Try it Section */}
+            <div className="mt-6 bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-lg p-8 text-white text-center">
+              <h3 className="text-2xl font-bold mb-3">{t.tryIt}</h3>
+              <p className="text-green-100 mb-4">
+                {lang === 'ar' ? 'ابدأ بتعلم البرمجة اليوم مع أمثلة تفاعلية' : 
+                 lang === 'en' ? 'Start learning to code today with interactive examples' :
+                 'Commencez à apprendre à coder aujourd\'hui avec des exemples interactifs'}
+              </p>
+              <button className="bg-white text-green-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+                {lang === 'ar' ? 'ابدأ التعلم' : lang === 'en' ? 'Start Learning' : 'Commencer l\'apprentissage'}
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default W3SchoolsClone;
